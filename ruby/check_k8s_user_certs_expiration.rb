@@ -33,8 +33,8 @@ certs.each do |item|
   current_cluster_name = item['name']
   puts "cluster name: #{current_cluster_name}"
   current_cert_obj = OpenSSL::X509::Certificate.new current_cert
-  # apparently DateTime.parse doesn't like \s UTC so let's remove it, shall we?
-  current_cert_enddate = current_cert_obj.not_after.to_s.chomp(" UTC")
+  # apparently DateTime.parse doesn't like \sUTC so let's remove it, shall we?
+  current_cert_enddate = current_cert_obj.not_after.to_s.chomp(' UTC')
   days_left = (DateTime.parse(current_cert_enddate) - DateTime.now).to_i
   if days_left <= limit
     puts "cert expires: #{current_cert_enddate} (\033[31m#{days_left} days left!\033[0m)\n"
